@@ -30,3 +30,24 @@ VPC->create flow log,filter->all(flow log role)
 ######6
 cloudwatch->log->define metric filter
 [version, accountid, interfaceid, srcaddr,dstaddr,srcport, dstport=22, protocol=6, packets,bytes,start,end,action=REJECT, logstatus]
+#####5 running EC2 in VPC
+####1
+secondary ENI use cases:  
+high avail NAT  
+secure subnet access  
+network security applicance  
+
+hands on:  
+create a eni, choose a bastion subnet, (private subnet, then attach bastion instance.
+
+#####6 troubleshooting
+######1 AWS services
+no route found: check route table  
+permission denied: check IAM role user group  
+no message: check security group, check NACL
+######2
+Dedugging connection EC2 process:  
+internet gateway->security allow access?->NACL allow access?->Is there a deny rule in the security group or NACL?  
+
+
+
