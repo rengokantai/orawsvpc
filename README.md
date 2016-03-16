@@ -20,9 +20,13 @@ vpc gateways,routes and subnets, networks access control, security group
 ```
 netstat -nt
 ```
-######NACL
+######3 NACL
 It will examine across different subnets.(2b and 2c)  
-web layer: inbound: http https ssh(from bastion) outbound:8080
-app layer: inbound: 8080 SSH(from bastion) outboundL to RDS 3306
-RDS: inbound:3306
-
+web layer: inbound: http https ssh(from bastion) outbound:8080  
+app layer: inbound: 8080 SSH(from bastion) outboundL to RDS 3306  
+RDS: inbound:3306  
+######5
+VPC->create flow log,filter->all(flow log role)
+######6
+cloudwatch->log->define metric filter
+[version, accountid, interfaceid, srcaddr,dstaddr,srcport, dstport=22, protocol=6, packets,bytes,start,end,action=REJECT, logstatus]
