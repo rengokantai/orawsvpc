@@ -31,11 +31,23 @@ VPC->create flow log,filter->all(flow log role)
 cloudwatch->log->define metric filter
 [version, accountid, interfaceid, srcaddr,dstaddr,srcport, dstport=22, protocol=6, packets,bytes,start,end,action=REJECT, logstatus]
 #####5 Running Your EC2 Instances In The VPC
-####1
+######1 Configuring Your EC2 Instance To Run In A VPC
+PRIMARY elastic network interface (ENI)
+- inherits the IP address of subnet
+- Gets public IP addr at instance start, auto-assigned by subnet, or manually assigned  
+- Can get elastic ip
+- own mac address
+- up to 5 sg
+- multiple ip
+- deleted by default on instance termination
+- You can attach secondary ENI to instance, but second ENI must in diff 
+subnet and same availability zone.(not deleted when attached to ec2 was deleted
+
+
 secondary ENI use cases:  
-high avail NAT  
-secure subnet access  
-network security applicance  
+- high avail NAT  
+- secure subnet access  
+- network security applicance  
 
 hands on:  
 create a eni, choose a bastion subnet, (private subnet, then attach bastion instance.
