@@ -1,16 +1,16 @@
 #### orawsvpc
-#####2
+#####2 The Basics Of VPC
 ######5 vpc,easyway2
 
 cloudformation ->launch cloudformer
-#####3
+#####3 Going Deeper In The VPC - The Components Of A VPC
 ######4 vpc endpoint
 choose privatereotetable.  
 deny anyone without ssl.
 principal:* aws service:amazons3 arn:* condition:Bool Key: asw:SecureTransport value:false  
 Generate policy,copy,overrite original policy.
 
-#####4
+#####4 Security In The VPC
 ######1 security groups
 
 from outer to inner:
@@ -30,7 +30,7 @@ VPC->create flow log,filter->all(flow log role)
 ######6
 cloudwatch->log->define metric filter
 [version, accountid, interfaceid, srcaddr,dstaddr,srcport, dstport=22, protocol=6, packets,bytes,start,end,action=REJECT, logstatus]
-#####5 running EC2 in VPC
+#####5 Running Your EC2 Instances In The VPC
 ####1
 secondary ENI use cases:  
 high avail NAT  
@@ -40,7 +40,28 @@ network security applicance
 hands on:  
 create a eni, choose a bastion subnet, (private subnet, then attach bastion instance.
 
-#####6 troubleshooting
+
+#####6 VPC Connectivity
+######Creating Fault-Tolerant VPN Connections
+server:VGW  ->VPN<- customer gateway  
+In vpc->VPN connections->Virtual private gateways->create virtual private gateway->attach to vpc  
+In vpc->VPN connections->Customer gateways->create customer gateway
+######Connecting To Other VPCs Using VPC Peering
+VPC peering:  
+- Dont overlap IP Address ranges  
+- Limit access viaroute tables in subnets
+- Not transitive  
+
+In VPC->Peering connection conection a to b  
+in vpc b's route table, add a route from vpc a(10.1.0.0/16), target=pcx-xxxxxx,save.  
+public route table, add same.
+######Using Direct Connect
+use case:
+- High speed low latency requirements(Ad insertion, Realtime)
+- High data volumes
+- increased data security
+
+#####7 Troubleshooting
 ######1 AWS services
 no route found: check route table  
 permission denied: check IAM role user group  
@@ -48,6 +69,9 @@ no message: check security group, check NACL
 ######2
 Dedugging connection EC2 process:  
 internet gateway->security allow access?->NACL allow access?->Is there a deny rule in the security group or NACL?  
-
+Routing:Dynamic IP:? BGP ASN:62332  
+VPN Connections-> connect   
+Note:$0.05 per hour  
+Download configuraion->Vendor:Generic,platform: G
 
 
